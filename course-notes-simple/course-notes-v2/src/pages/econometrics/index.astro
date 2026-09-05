@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const lectures = [{'title': 'Ch 01: Nature of Econometrics & Economic Data', 'path': '/econometrics/ch01', 'num': 1, 'date': 'Sep 5, 2026', 'exam': True}];
+---
+
+<Layout>
+  <div class="max-w-3xl mx-auto">
+    <div class="mb-8">
+      <span class="text-sm text-slate-500">Economics</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Econometrics</h1>
+    </div>
+
+    <div class="space-y-3">
+      {lectures.map(l => (
+        <a href={l.path} class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors group">
+          <span class="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-sm font-bold text-slate-600 dark:text-slate-400 flex-shrink-0">
+            {String(l.num).padStart(2, '0')}
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">{l.title}</div>
+            <div class="text-sm text-slate-500">{l.date}</div>
+          </div>
+          {l.exam && <span class="text-xs font-medium text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-1 rounded flex-shrink-0">🔥 Exam</span>}
+        </a>
+      ))}
+    </div>
+
+    {lectures.length === 0 && (
+      <div class="text-center py-12 text-slate-500">
+        <p>No lectures added yet.</p>
+        <p class="text-sm mt-2">Create a new .mdx file in src/pages/econometrics/ to add your first lecture.</p>
+      </div>
+    )}
+  </div>
+</Layout>

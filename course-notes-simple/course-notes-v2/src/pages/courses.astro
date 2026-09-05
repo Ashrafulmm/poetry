@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const allCourses = [
+  { name: 'Econometrics', path: '/econometrics', subject: 'Economics', desc: 'Statistical methods for economic data analysis' },
+  { name: 'International Trade', path: '/international-trade', subject: 'Business', desc: 'Trade procedures, laws, and practices' },
+  { name: 'International Business', path: '/international-business', subject: 'Business', desc: 'Global business management' },
+  { name: 'Financial Management', path: '/financial-management', subject: 'Finance', desc: 'Corporate finance and investment' },
+  { name: 'Marketing Management', path: '/marketing-management', subject: 'Marketing', desc: 'Strategic marketing and consumer behavior' },
+  { name: 'Organizational Behavior', path: '/organizational-behavior', subject: 'Management', desc: 'Human behavior in organizations' },
+  { name: 'Business Law', path: '/business-law', subject: 'Law', desc: 'Legal principles for business' },
+  { name: 'Strategic Management', path: '/strategic-management', subject: 'Management', desc: 'Business strategy and competitive advantage' },
+];
+---
+
+<Layout>
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2">All Courses</h1>
+    <p class="text-slate-500 dark:text-slate-400 mb-8">{allCourses.length} courses across multiple subjects</p>
+
+    <div class="space-y-3">
+      {allCourses.map(c => (
+        <a href={c.path} class="flex items-center justify-between p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors group">
+          <div>
+            <div class="font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{c.name}</div>
+            <div class="text-sm text-slate-500">{c.subject} — {c.desc}</div>
+          </div>
+          <svg class="w-5 h-5 text-slate-400 group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

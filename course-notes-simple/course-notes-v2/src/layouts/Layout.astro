@@ -1,0 +1,139 @@
+---
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title || "NotesHub";
+const isLecture = !!frontmatter?.course;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | NotesHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 antialiased">
+    <div class="flex min-h-screen flex-col lg:flex-row">
+      <!-- Sidebar -->
+      <aside class="lg:w-64 lg:h-screen lg:sticky lg:top-0 bg-white dark:bg-slate-800 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-700 flex-shrink-0">
+        <div class="h-14 flex items-center px-4 border-b border-slate-200 dark:border-slate-700">
+          <a href="/" class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">N</div>
+            <span class="font-bold text-slate-900 dark:text-white">NotesHub</span>
+          </a>
+        </div>
+        <nav class="p-3 space-y-1 overflow-y-auto max-h-[calc(100vh-3.5rem)]">
+          <a href="/" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname === '/' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' : 'text-slate-700 dark:text-slate-200'}">🏠 Home</a>
+          <a href="/courses" class="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname === '/courses' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' : 'text-slate-700 dark:text-slate-200'}">📚 All Courses</a>
+
+          <div class="pt-4 pb-2 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Subjects</div>
+
+          <a href="/econometrics" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/econometrics') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-2"></span>Econometrics
+          </a>
+          <a href="/international-trade" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/international-trade') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2"></span>Int. Trade
+          </a>
+          <a href="/international-business" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/international-business') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2"></span>Int. Business
+          </a>
+          <a href="/financial-management" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/financial-management') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2"></span>Finance
+          </a>
+          <a href="/marketing-management" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/marketing-management') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-rose-500 mr-2"></span>Marketing
+          </a>
+          <a href="/organizational-behavior" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/organizational-behavior') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-cyan-500 mr-2"></span>Org. Behavior
+          </a>
+          <a href="/business-law" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/business-law') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-indigo-500 mr-2"></span>Business Law
+          </a>
+          <a href="/strategic-management" class="block px-3 py-2 text-sm rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors {Astro.url.pathname.startsWith('/strategic-management') ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 font-medium' : 'text-slate-600 dark:text-slate-400'}">
+            <span class="inline-block w-2 h-2 rounded-full bg-orange-500 mr-2"></span>Strategy
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main -->
+      <div class="flex-1 min-w-0">
+        <!-- Top bar -->
+        <div class="h-14 bg-white/80 dark:bg-slate-900/80 backdrop-blur border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
+          {isLecture && (
+            <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <a href="/" class="hover:text-blue-600">Home</a>
+              <span>/</span>
+              <a href={`/${frontmatter.course.toLowerCase().replace(/\s+/g, '-')}`} class="hover:text-blue-600">{frontmatter.course}</a>
+              <span>/</span>
+              <span class="text-slate-900 dark:text-white font-medium">{frontmatter.title}</span>
+            </div>
+          )}
+          {!isLecture && <div></div>}
+          <button id="themeBtn" class="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            <span class="dark:hidden">🌙</span>
+            <span class="hidden dark:inline">☀️</span>
+          </button>
+        </div>
+
+        <!-- Content -->
+        <main class="max-w-3xl mx-auto px-6 py-8">
+          {isLecture && frontmatter.lectureNumber && frontmatter.totalLectures && (
+            <div class="mb-6">
+              <div class="flex flex-wrap items-center gap-3 mb-3">
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                  LECTURE {String(frontmatter.lectureNumber).padStart(2,'0')} / {String(frontmatter.totalLectures).padStart(2,'0')}
+                </span>
+                {frontmatter.examImportant && (
+                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">🔥 Exam Important</span>
+                )}
+                <span class="text-sm text-slate-500">{frontmatter.date}</span>
+              </div>
+              <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-3">{frontmatter.title}</h1>
+              {frontmatter.tags && (
+                <div class="flex flex-wrap gap-2">
+                  {frontmatter.tags.map(tag => (
+                    <span class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs rounded-md">#{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          <div class="prose prose-slate dark:prose-invert max-w-none
+            prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white
+            prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+            prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+            prose-p:text-slate-600 dark:prose-p:text-slate-300 prose-p:leading-relaxed
+            prose-a:text-blue-600 dark:prose-a:text-blue-400
+            prose-strong:text-slate-900 dark:prose-strong:text-white
+            prose-code:text-pink-600 dark:prose-code:text-pink-400 prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+            prose-pre:bg-slate-900 prose-pre:rounded-xl
+            prose-table:border prose-table:border-slate-200 dark:prose-table:border-slate-700
+            prose-th:bg-slate-100 dark:prose-th:bg-slate-800 prose-th:px-4 prose-th:py-2
+            prose-td:px-4 prose-td:py-2 prose-td:border-t prose-td:border-slate-200 dark:prose-td:border-slate-700
+            prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-900/20 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
+            prose-ul:my-4 prose-li:my-1">
+            <slot />
+          </div>
+
+          {isLecture && (
+            <div class="mt-12 pt-6 border-t border-slate-200 dark:border-slate-700">
+              <a href={`/${frontmatter.course.toLowerCase().replace(/\s+/g, '-')}`} class="text-sm text-blue-600 hover:underline">← Back to {frontmatter.course}</a>
+            </div>
+          )}
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const btn = document.getElementById('themeBtn');
+      const html = document.documentElement;
+      if (localStorage.theme === 'dark') html.classList.add('dark');
+      btn?.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+      });
+    </script>
+  </body>
+</html>
