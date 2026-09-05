@@ -1,26 +1,276 @@
 ---
-title: "Linear Regression Analysis"
-subject: "Econometrics"
-courseSlug: "econometrics"
+title: "Chapter 01: The Nature of Econometrics and Economic Data"
+subject: "Economics"
+course: "Econometrics"
 lectureNumber: 1
-totalLectures: 12
-date: 2026-09-01
-tags: ["OLS", "Regression", "Statistics"]
+totalLectures: 17
+date: "2026-09-05"
+tags: ["econometrics", "wooldridge", "data-types", "ols", "causality", "ceteris-paribus"]
 examImportant: true
+description: "Introduction to econometrics, types of economic data, and the concept of ceteris paribus."
 ---
 
-import Callout from '../../components/Callout.astro';
+## Learning Objectives
 
-## Introduction to OLS
+- Define econometrics and understand its role in economics
+- Identify the four types of economic data sets
+- Understand the difference between economic models and econometric models
+- Explain the concept of causality and ceteris paribus
+- Know the course structure and assessment criteria
 
-Ordinary Least Squares (OLS) is a statistical method that estimates the parameters in a linear regression model.
+---
 
-<Callout type="warning" title="Important Formula">
-  Make sure to memorize the OLS estimator derivation for the midterm.
+## What is Econometrics?
+
+**Econometrics** = the use of statistical methods to analyze economic data.
+
+Econometricians typically work with **non-experimental data** (observational data, not data from controlled lab experiments).
+
+### Typical Goals of Econometric Analysis
+
+| Goal | Description |
+|------|-------------|
+| **Estimation** | Estimating relationships between economic variables |
+| **Testing** | Testing economic theories and hypotheses |
+| **Forecasting** | Predicting future economic variables |
+| **Policy Evaluation** | Evaluating government and business policies |
+
+---
+
+## Steps in Econometric Analysis
+
+<Callout type="info" title="The Two-Step Process">
+1. **Economic Model** — Often based on theory (utility maximization, equilibrium, etc.). This step is sometimes skipped in practice.
+2. **Econometric Model** — Translate the economic model into a form that can be estimated with data. This involves specifying functional forms and identifying measurable variables.
 </Callout>
 
-### Key Assumptions
+### Economic Models
 
-1. Linearity in parameters
-2. Random sampling
-3. No perfect collinearity
+Economic models can be:
+- **Micro-models** (individual/firm behavior)
+- **Macro-models** (economy-wide behavior)
+
+They often use:
+- Optimizing behavior
+- Equilibrium modeling
+- Establishing relationships between variables
+
+**Examples:** Demand equations, pricing equations, production functions.
+
+---
+
+## Example 1: Economic Model of Crime (Becker, 1968)
+
+Based on **utility maximization**, the model suggests criminal activity depends on:
+
+| Factor | Effect on Crime |
+|--------|-----------------|
+| "Wage" of criminal activities | ↑ Higher illegal wage → more crime |
+| Wage for legal employment | ↑ Higher legal wage → less crime |
+| Other income | ↑ More outside income → less crime |
+| Probability of getting caught | ↑ Higher probability → less crime |
+| Probability of conviction | ↑ Higher conviction rate → less crime |
+| Expected sentence length | ↑ Longer sentence → less crime |
+| Age | Varies by life stage |
+
+> **Note:** The functional form of the relationship is **not specified** in the pure economic model. The equation could have been postulated without any formal economic modeling.
+
+---
+
+## Example 2: Model of Job Training & Productivity
+
+**Question:** What is the effect of additional training on worker productivity?
+
+A simple model: Hourly wage = f(Years of education, Years of experience, Weeks of job training)
+
+
+**Other factors** may also be relevant (innate ability, quality of education, family background), but the three variables above are considered the most important.
+
+---
+
+## From Economic Model to Econometric Model
+
+### Econometric Model of Criminal Activity
+
+The econometric version requires:
+
+1. **Specifying the functional form** (e.g., linear, log-linear)
+2. **Approximating variables** with measurable quantities:
+   - "Measure of criminal activity" → arrest frequency, conviction rate
+   - "Wage in criminal activity" → often unobserved, must be proxied
+Crime = β₀ + β₁(Legal Wage) + β₂(Other Income) + β₃(Prior Arrests)
++ β₄(Conviction Freq) + β₅(Avg Sentence) + β₆(Age) + u
+
+Where **u** = unobserved determinants of criminal activity (moral character, family background, etc.)
+
+### Econometric Model of Job Training
+Wage = β₀ + β₁(Education) + β₂(Experience) + β₃(Training) + u
+
+Where **u** = unobserved determinants of wage (innate ability, quality of education, etc.)
+
+<Callout type="warning" title="The Error Term (u)">
+Most of econometrics deals with the specification and properties of the **error term (u)**. It captures all factors that affect the dependent variable but are not included in the model.
+</Callout>
+
+### Using Econometric Models for Hypothesis Testing
+
+- The parameter **β₃** in the training equation represents the **"effect of training on wage"**
+- Key questions: How large is this effect? Is it **statistically different from zero**?
+
+---
+
+## Types of Economic Data
+
+Econometric methods depend heavily on the **nature of the data**. Using inappropriate methods leads to misleading results.
+
+### 1. Cross-Sectional Data
+
+- Sample of individuals, households, firms, cities, states, or countries at a **given point in time**
+- Observations are more or less **independent** (pure random sampling)
+- Sometimes violated: non-response, clustering
+- Common in **applied microeconomics**
+
+<Callout type="tip" title="Cross-Section Example">
+Data on wages and worker characteristics (education, experience) for 526 individuals at one point in time.
+</Callout>
+
+### 2. Time Series Data
+
+- Observations of one or more variables **over time**
+- Examples: stock prices, CPI, GDP, homicide rates, auto sales
+- Observations are typically **serially correlated** (past values relate to future values)
+- Features: **trends** and **seasonality**
+- Common in **macroeconomics and finance**
+
+<Callout type="tip" title="Time Series Example">
+Annual data on minimum wages, unemployment rates, and GNP from 1950–1987.
+</Callout>
+
+### 3. Pooled Cross Sections
+
+- Two or more cross sections **combined** into one data set
+- Cross sections are drawn **independently** of each other
+- Often used to **evaluate policy changes** (before/after comparisons)
+
+<Callout type="tip" title="Pooled Cross Section Example">
+Random sample of house prices in 1993 (before tax reform) combined with a new random sample in 1995 (after reform) to measure the effect of property tax changes.
+</Callout>
+
+### 4. Panel (Longitudinal) Data
+
+- The **same cross-sectional units** are followed over time
+- Has both a **cross-sectional** and a **time series** dimension
+- Advantages:
+  - Can account for **time-invariant unobservables**
+  - Can model **lagged responses**
+
+<Callout type="tip" title="Panel Data Example">
+City crime statistics where each city is observed in 1986 and 1990. This allows controlling for unobserved city characteristics that don't change over time.
+</Callout>
+
+### Summary Table: Data Types
+
+| Data Type | Structure | Key Feature | Typical Use |
+|-----------|-----------|-------------|-------------|
+| **Cross-sectional** | Many units, one time period | Independent observations | Microeconomics |
+| **Time series** | One unit, many time periods | Serial correlation | Macroeconomics, Finance |
+| **Pooled cross sections** | Many units, a few time periods | Independent samples per period | Policy evaluation |
+| **Panel/Longitudinal** | Same units, many time periods | Controls for unobservables | Advanced micro/macro |
+
+---
+
+## Causality and Ceteris Paribus
+
+### The Core Problem
+
+Most economic questions are **ceteris paribus** questions — "all else being equal."
+
+**Definition:** The causal effect of X on Y is:
+> *"How does Y change if X is changed, but all other relevant factors are held constant?"*
+
+### Example 1: Fertilizer and Crop Yield
+
+**Question:** By how much will soybean production increase if fertilizer is increased?
+
+**Implicit assumption:** Quality of land, rainfall, parasites, etc. are held fixed.
+
+**Ideal experiment:** Randomly assign different fertilizer amounts to plots. This works because fertilizer is **unrelated** to other yield factors.
+
+### Example 2: Return to Education
+
+**Question:** If a person receives one more year of education, how much does their wage increase?
+
+**Problem:** We cannot run this experiment. Education is **related** to other wage factors (intelligence, family background). People with more education may differ in unobserved ways.
+
+### Example 3: Police and Crime
+
+**Question:** If a city gets 10 more police officers, how much does crime fall?
+
+**Problem:** In reality, the number of police is **determined by** the crime rate (simultaneous causation). High-crime cities hire more police.
+
+### Example 4: Minimum Wage and Unemployment
+
+**Question:** By how much will unemployment increase if the minimum wage rises?
+
+**Problem:** The minimum wage level depends on political and economic factors that also influence unemployment.
+
+<Callout type="warning" title="The Fundamental Challenge">
+Without **random assignment**, the causal effect of X on Y is difficult to isolate because X is usually correlated with other factors that affect Y. This is the central problem econometric methods try to solve.
+</Callout>
+
+---
+
+## Course Information
+
+### Textbook
+**Introductory Econometrics: A Modern Approach, 7th Edition**  
+by Jeffrey M. Wooldridge
+
+### Grading
+
+| Component | Weight |
+|-----------|--------|
+| Homework | 10% |
+| Quizzes | 10% |
+| Midterm | 20% |
+| Project | 20% |
+| Final Exam | 40% |
+
+*Final grade based on a curve of the overall score.*
+
+### Weekly Schedule
+
+| Week | Chapter | Topic |
+|------|---------|-------|
+| 1 | Ch. 1 | The Nature of Econometrics and Economic Data |
+| 2 | Appendices A–C | Essential Mathematics and Statistics Review |
+| 3–5 | Ch. 2 | Simple Regression Model (OLS, Properties, Assumptions) |
+| 6–7 | Ch. 3 | Multiple Regression Analysis (Estimation, Omitted Variable Bias) |
+| 8 | Ch. 4 | Multiple Regression: Inference + Mid-term Review |
+| 10 | Ch. 5 | OLS Asymptotics |
+| 11 | Ch. 6 | Multiple Regression: Further Issues |
+| 12 | Ch. 7 | Multiple Regression with Qualitative Information |
+| 13 | Ch. 8 | Heteroskedasticity |
+| 14 | Ch. 9 | More on Specification and Data Issues |
+| 15 | Ch. 13 | Pooling Cross Sections: Simple Panel Data Methods |
+| 16 | Ch. 14 | Advanced Panel Data Methods |
+| 17 | — | Course Review |
+
+---
+
+## Key Terms
+
+| Term | Definition |
+|------|------------|
+| **Econometrics** | Use of statistical methods to analyze economic data |
+| **Economic model** | Theoretical relationship derived from economic principles |
+| **Econometric model** | Empirical version of an economic model, ready for estimation |
+| **Error term (u)** | Unobserved factors affecting the dependent variable |
+| **Cross-sectional data** | Data on many units at a single point in time |
+| **Time series data** | Data on one unit over multiple time periods |
+| **Pooled cross sections** | Multiple independent cross sections combined |
+| **Panel data** | Same units observed over multiple time periods |
+| **Ceteris paribus** | "All other things being equal" |
+| **Causal effect** | Change in Y resulting from a change in X, holding other factors constant |
+| **OLS** | Ordinary Least Squares — the basic estimation method |
+| **Heteroskedasticity** | Non-constant variance of the error term |
